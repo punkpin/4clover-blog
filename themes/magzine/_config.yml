@@ -171,7 +171,7 @@ comments:
   shortname:
   # Twikoo configuration
   twikoo:
-    envId:   # Your environment ID
+    envId: https://blog-twitoo.vercel.app  # 你的 Vercel 部署地址
     region: # Your service region, e.g. ap-guangzhou
     path: window.location.pathname  # Default is window.location.pathname
     visitor: true  # Enable visitor count
