@@ -1,0 +1,334 @@
+
+# Site Settings
+favicon: /images/favicon.ico # 网站图标,图标建议尺寸为 64x64 或 32x32 像素,图标名字和格式必须为favicon.ico
+logo: /images/0.jpg  # 作者头像,建议尺寸为 200x200 像素,支持png/jpg/jpeg/svg格式
+# 首页图
+# Hero Section
+hero:
+  enable: false  # 是否开启首页图片
+  background_image: /images/11.webp
+  typing_text: 
+    - " In case I don't see ya, good afternoon, good evening, and good night！"
+    - " Hope is a good thing, maybe the best of things, and no good thing ever dies."
+    - " Life is like a box of chocolates. You never know what you're gonna get."
+    - " The only limit to our realization of tomorrow will be our doubts of today."
+  typing_speed: 100
+  delete_speed: 50
+  pause_duration: 2000
+  scroll_hint: 向下探索更多
+
+# Article List 首页文章卡片大小
+article_list:
+  card_size: normal  # normal or large
+  view_mode: "modal"  # 文章浏览方式: "redirect"(跳转模式) 或 "modal"(模态窗口模式)
+
+# Colors 颜色配置 (明日方舟风格)
+colors:
+  primary: '#D2D2D2'       # 主文字色（浅灰，纯黑背景上阅读舒适）
+  secondary: '#898989'     # 次级文字色（中灰）
+  accent: '#18D1FF'        # 主题色（明日方舟青蓝）
+  background: '#000000'    # 背景色（纯黑）
+  text: '#D2D2D2'          # 正文色
+  overlay: 'rgba(0, 0, 0, 0.85)'  # 遮罩
+  tag_background: '#14191D'   # 标签背景（深蓝灰）
+  card_background: '#14191D'   # 文章卡片背景（深蓝灰）
+
+# Typography 字体配置（几何感无衬线，明日方舟风格）
+fonts:
+  primary: '"Rajdhani", "Noto Sans SC", -apple-system, BlinkMacSystemFont, sans-serif'
+  secondary: '"Rajdhani", "Noto Sans SC", sans-serif'
+  monospace: '"Fira Code", "JetBrains Mono", Monaco, Consolas, monospace'
+
+# Layout 布局配置
+layout:
+  max_width: 1400px
+  sidebar_width: 300px
+  content_padding: 2rem
+
+# Social Links 社交链接
+social:
+  github: https://github.com/punkpin
+#  twitter: https://twitter.com/yourusername
+#  instagram: https://instagram.com/yourusername
+#  linkedin: https://linkedin.com/in/yourusername
+  email: mailto:2718373912@qq.com
+  bilibili: https://space.bilibili.com/651314105
+
+# Navigation Menu 导航菜单
+menu:
+  首页: /
+  关于: /about/
+  归档: /archives/
+  分类: /categories/
+  标签: /tags/
+  友链: /link/
+  "Language": "#lang-switch" # 语言切换菜单项
+  网站:
+    示例网站: https://example.com
+
+
+# Header 头部
+# Navigation Bar Style (导航栏样式)
+navbar:
+  style: "bubble"  # "fill" (填充样式) 或 "bubble" (气泡样式，两边不填充，带圆角)
+
+# Footer 页脚
+footer:
+  copyright: © 2026 晴空四叶草. 保留所有权利.
+  custom_html: ""
+  # Footer centered image with link (页脚居中图片及链接)
+  #image:
+    #enable: false  # 是否显示图片，设为true显示
+    #src: "https://s21.ax1x.com/2024/08/23/pAFm0cq.png"  # 图片URL
+    #link: "https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"  # 图片链接地址
+    #alt: "Footer Image"  # 图片替代文本
+  badges:
+      - link: https://hexo.io/ #徽标指向网站链接
+        shields: https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg #徽标API
+        message: 博客框架为Hexo #徽标提示语  
+      - link: http://creativecommons.org/licenses/by-nc-sa/4.0/
+        shields: https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg
+        message: 本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可
+
+# 启动blog封面组件
+cover:
+  enable: true
+  title: "欢迎来到晴空四叶草的秘密基地"   # 封面主标题
+  author: "晴空四叶草"             # 封面副标题 / 作者
+  btn_text: "开始你的旅行"       # 底部按钮文字
+  images:                      # 封面轮播图列表 (按顺序播放，至少两张)
+    - /images/10.png
+    - /images/14.png
+    - /images/15.png
+    - /images/13.jpg
+
+# Sakana 小人摆件组件
+sakana:
+  enable: false  # 是否启用sakana小人摆件组件
+
+# 调色板组件 (主题色切换)
+color_picker:
+  enable: true  # 是否开启右上角主题调色板
+
+# 字数统计与阅读时长 (需安装插件: npm install hexo-wordcount)
+wordcount:
+  enable: true  # 是否在文章元数据区域显示字数和预计阅读时间
+
+
+# Music Player - 已替换为 MetingJS (网易云歌单)
+# 原自带播放器已关闭，MetingJS 配置在下方 inject 区域
+music_player:
+  enable: false   # 关闭自带播放器，改用 MetingJS
+
+# 碎碎念页面配置
+murmur:
+  enable: true  # 是否开启碎碎念页面
+  banner:
+    enable: true  # 是否显示顶部横幅
+    background_image: /images/1.webp  # 横幅背景图
+
+# Features (功能)
+features:
+  dark_mode: true  # 是否开启暗黑模式
+  smooth_scroll: true
+  back_to_top: true  # 是否开启返回顶部按钮
+  loading_animation: false  # 是否开启加载动画，默认关闭,如果你喜欢可以改为true开启,但是会增加页面加载时间
+
+# Code Block Settings (代码高亮)
+code_block:
+  height_limit: 200  # 代码块高度限制，超过此高度显示展开按钮
+  enable_folding: true  # 启用代码折叠功能
+  max_height: 300px  # 代码块最大高度（像素）
+  show_lang: true  # 是否在代码块上方工具栏显示代码语言（默认true）
+
+
+
+# Author Card (作者卡片)
+author_card:
+  enable: true
+  avatar:  /images/0.jpg
+  name: 晴空四叶草
+  bio: In case I don't see ya, good afternoon, good evening, and good night！
+  button_text: 关于我
+  button_link: /about/
+  background_image: "/images/13.jpg"
+  width: large # normal or large
+  # 作者卡片背景动画
+  background_animation:
+    enable: false  # 默认为false，启用后会在没有背景图片时显示动态背景
+    type: geometric  # 背景动画类型：particles, geometric, gradient
+    color_scheme: auto  # 颜色方案：auto（自动跟随主题）、light、dark
+    interactive: true  # 是否启用鼠标交互效果
+    density: high  # 动画元素密度：low, medium, high
+
+
+
+# Comments (optional)
+# 例如twikoo的部署请参考https://twikoo.js.org/quick-start.html
+comments:
+  enable: true
+  type: twikoo  # disqus, gitalk, valine, twikoo
+  shortname:
+  # Twikoo configuration
+  twikoo:
+    envId:   # Your environment ID
+    region: # Your service region, e.g. ap-guangzhou
+    path: window.location.pathname  # Default is window.location.pathname
+    visitor: true  # Enable visitor count
+    option: # Additional options
+
+# Share buttons (optional)
+share:
+  enable: true
+  options:
+    twitter: true
+    facebook: true
+    linkedin: true
+    copy_link: true
+    wechat: true
+    qq: true
+    weibo: true
+    option: # Additional options
+
+# Theme Configuration
+theme_config:
+  # 文章设置
+  post:
+    excerpt_length: 150  # 文章摘要长度
+    read_more: "阅读更多"  # 阅读更多按钮文字
+    use_default_cover: true  # 当文章未设置封面时是否使用默认封面
+    default_cover: "/images/19.png"  # 默认封面图片路径
+
+
+  # 统计分析
+  analytics:
+    enabled: true
+    google_analytics_id: ""
+    baidu_analytics_id: ""
+
+  # 搜索功能,需要安装hexo-generator-search插件,执行npm install hexo-generator-search
+  # 然后前往hexo根目录的_config.yml文件(不是你现在看的这个文件)最底部添加以下内容
+  #----------------------------
+    #search:
+      #path: search.json 
+      #field: post
+      #content: true
+      #format: html
+  #----------------------------
+  search:
+    enabled: true
+    provider: "local"  # local, algolia
+    algolia_app_id: ""
+    algolia_api_key: ""
+    algolia_index_name: ""
+
+
+
+  # 性能优化
+  performance:
+    # 图片懒加载
+    lazyload: true
+    # 代码压缩
+    minify: true
+    # 缓存
+    cache: true
+
+# 图片压缩功能 (需安装 sharp 依赖: npm install sharp)
+# 注意:触发压缩的方法为先hexo clean清理public文件夹,然后连续执行两次hexo generate命令,第一次是生成图片,第二次才会触发压缩,最后hexo deploy发布
+# 或者执行hexo clean + hexo generate + hexo server命令,在本地预览时触发压缩,然后直接hexo deploy发布
+compress_images:
+  enable: true       # 是否开启图片压缩 (默认开启，改为 false 关闭)
+  min_size: 10240      # 最小压缩大小，小于此大小(10KB)的图片不压缩
+  ignore: []           # 忽略的图片格式，例如: ['.gif', '.svg']
+  quality:             # 各种格式的压缩质量 (0-100)
+    jpeg: 60
+    png: 60
+    webp: 70
+    avif: 60
+    gif: 60
+
+# Custom code injection
+inject:
+  head:
+    # Custom CSS
+    # - <link rel="stylesheet" href="/css/custom.css" media="defer" onload="this.media='all'">
+    - <link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"> #AI
+    - <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    # MetingJS / APlayer CSS (网易云歌单播放器)
+    - <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+    # MetingJS 暗色主题样式
+    - <link rel="stylesheet" href="/css/meting-dark.css">
+  bottom:
+    # Custom JavaScript
+    # - <script src="/js/xxx"></script>
+    - <script src="/js/ai.js"></script> #ai
+    - <script src="/js/postai.js"></script> #ai
+    #以下是数学公式支持
+    - <script src="/js/math-support.js"></script>  # 数学公式
+    #以下是鼠标点击效果,仅可启用一个
+    # - <script src="/js/click-heart.js"></script> # 鼠标点击爱心文字特效
+    - <script src="/js/click-fireworks.js"></script> # 鼠标点击三角烟花特效
+
+    #以下是背景动画特效
+    - <script src="/js/falling-leaves.js"></script> # 梧桐落叶特效
+    #以下是语言切换支持
+    - <script src="/js/lang-switch.js"></script> # 语言切换脚本
+
+    # 网易云歌单播放器
+    - <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+    - <div id="blog-player"></div>
+    - <script src="/js/music-init.js"></script>
+    
+# 语言切换功能
+#本主题翻译功能不是很成熟,不满足i18n需求,只满足中英转换,请前往themes\magzine\source\js\lang-switch.js自定义翻译文本
+#结合浏览器翻译插件---沉浸式翻译(https://immersivetranslate.com/en/)  体验更佳
+
+
+# AI摘要配置
+ai_summary:
+  enable: true  # 是否启用AI摘要功能，默认关闭
+  api_key: "sk-5a4f3ff9e5294570aa61562ce0d429ec"  # 这里不要填任何东西,详细部署教程请参考：https://2am.top/2025/12/22/Workers%E5%AE%9E%E7%8E%B0Api%E7%99%BD%E5%90%8D%E5%8D%95/
+  summary_directly: false  # 是否直接生成摘要，默认为false（需要点击按钮生成）
+  # 其他可选配置
+  ai_name: "clover-AI"  # AI名称
+  ai_introduce: "我是文章辅助AI: clover-AI，一个基于deepseek的强大语言模型，有什么可以帮到您？😊"  # AI介绍语
+  ai_version: "deepseek-v4-pro"  # AI版本显示
+  # 按钮文本
+  buttons:
+    - "介绍自己"
+    - "来点灵感"
+    - "生成AI简介"
+
+# Categories Page 分类页样式
+categories:
+  layout: accordion  # accordion (展开式) or page (跳转式)
+  accordion_animation: true  # 是否启用展开/折叠动画
+  show_empty_categories: true  # 是否显示没有文章的分类
+
+# Table of Contents (目录) 设置
+toc:
+  # 当没有目录时的显示方式
+  # hide: 隐藏目录侧边栏，并调整主内容区域宽度为全屏
+  # placeholder: 保持目录侧边栏占位，但隐藏目录内容
+  empty_toc_behavior: placeholder  # hide 或 placeholder
+
+
+CDN:
+  # The CDN provider of internal scripts (主题内部 js 的 cdn 配置)
+  # option: local/elemecdn/jsdelivr/unpkg/cdnjs/onmicrosoft/cbd/anheyu/custom
+  # Dev version can only choose. ( dev版的主题只能设置为 local )
+  internal_provider: local
+
+  # The CDN provider of third party scripts (第三方 js 的 cdn 配置)
+  # option: elemecdn/jsdelivr/unpkg/cdnjs/onmicrosoft/cbd/anheyu/custom
+  third_party_provider: unpkg
+
+  # Add version number to CDN, true or false
+  version: true
+
+  # Custom format
+  # For example: https://cdn.staticfile.org/${cdnjs_name}/${version}/${min_cdnjs_file}
+  custom_format: # https://npm.elemecdn.com/${name}@latest/${file}
+
+
+  option:

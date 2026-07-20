@@ -1,0 +1,201 @@
+/* ===== APlayer 明日方舟暗色主题 ===== */
+
+/* 文章详情页隐藏播放器 */
+body:has(.post-content) .aplayer {
+  display: none !important;
+}
+
+/* --- 本体 --- */
+.aplayer {
+  background: rgba(20, 25, 29, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5) !important;
+  font-family: var(--font-primary, sans-serif) !important;
+}
+
+/* --- 歌曲信息区 --- */
+.aplayer .aplayer-info {
+  border-top-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.aplayer .aplayer-music {
+  color: #D2D2D2 !important;
+}
+
+.aplayer .aplayer-title {
+  color: #D2D2D2 !important;
+}
+
+.aplayer .aplayer-author {
+  color: #898989 !important;
+}
+
+/* --- 控制器区域 --- */
+.aplayer .aplayer-controller {
+  /* 确保按钮可见 */
+}
+
+/* 所有 SVG 图标变亮 */
+.aplayer .aplayer-icon {
+  color: #B0B0B0 !important;
+}
+
+.aplayer .aplayer-icon:hover {
+  color: #18D1FF !important;
+}
+
+/* 播放/暂停按钮 */
+.aplayer .aplayer-icon-play,
+.aplayer .aplayer-icon-pause {
+  color: #18D1FF !important;
+}
+
+/* 时间文字 */
+.aplayer .aplayer-time {
+  color: #B0B0B0 !important;
+}
+
+.aplayer .aplayer-time .aplayer-icon {
+  color: #B0B0B0 !important;
+}
+
+.aplayer .aplayer-time .aplayer-icon:hover {
+  color: #18D1FF !important;
+}
+
+/* --- 进度条 --- */
+.aplayer .aplayer-bar-wrap {
+  /* 确保可见 */
+}
+
+.aplayer .aplayer-bar {
+  background: rgba(255, 255, 255, 0.15) !important;
+  height: 4px !important;
+}
+
+.aplayer .aplayer-played {
+  background: #18D1FF !important;
+  height: 4px !important;
+}
+
+.aplayer .aplayer-thumb {
+  background: #18D1FF !important;
+  border: 2px solid #000 !important;
+  box-shadow: 0 0 8px rgba(24, 209, 255, 0.6) !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin-top: -5px !important;
+}
+
+/* --- 音量 --- */
+.aplayer .aplayer-volume-wrap .aplayer-icon {
+  color: #B0B0B0 !important;
+}
+
+.aplayer .aplayer-volume-wrap .aplayer-icon:hover {
+  color: #18D1FF !important;
+}
+
+.aplayer .aplayer-volume-bar-wrap .aplayer-volume-bar {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.aplayer .aplayer-volume-bar-wrap .aplayer-volume-bar .aplayer-volume {
+  background: #18D1FF !important;
+}
+
+/* --- 播放模式按钮 --- */
+.aplayer .aplayer-icon-mode,
+.aplayer .aplayer-icon-menu,
+.aplayer .aplayer-icon-loop {
+  color: #B0B0B0 !important;
+}
+
+.aplayer .aplayer-icon-mode:hover,
+.aplayer .aplayer-icon-menu:hover,
+.aplayer .aplayer-icon-loop:hover {
+  color: #18D1FF !important;
+}
+
+/* --- 歌单列表 --- */
+.aplayer .aplayer-list {
+  background: rgba(10, 15, 19, 0.97) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.aplayer .aplayer-list ol li {
+  border-top: 1px solid rgba(255, 255, 255, 0.04) !important;
+  color: #898989 !important;
+}
+
+.aplayer .aplayer-list ol li:hover {
+  background: rgba(24, 209, 255, 0.08) !important;
+  color: #D2D2D2 !important;
+}
+
+.aplayer .aplayer-list ol li.aplayer-list-light {
+  background: rgba(24, 209, 255, 0.12) !important;
+  color: #18D1FF !important;
+}
+
+.aplayer .aplayer-list-index {
+  color: #555 !important;
+}
+
+.aplayer .aplayer-list-title {
+  color: #D2D2D2 !important;
+}
+
+.aplayer .aplayer-list-author {
+  color: #898989 !important;
+}
+
+/* --- 封面 --- */
+.aplayer .aplayer-pic {
+  border-radius: 4px !important;
+}
+
+.aplayer .aplayer-pic .aplayer-button {
+  background: rgba(0, 0, 0, 0.6) !important;
+  color: #18D1FF !important;
+}
+
+/* --- 强制显示控制器（fixed 模式默认隐藏 info，这里强制显示） --- */
+.aplayer.aplayer-fixed .aplayer-body {
+  /* body 只保留封面，不要占太多空间 */
+}
+
+.aplayer.aplayer-fixed .aplayer-info {
+  display: flex !important;   /* 强制显示控制器 */
+  border-top: none !important;
+  padding: 8px 12px !important;
+}
+
+/* hover 时不需要再切换 */
+.aplayer.aplayer-fixed .aplayer-body:hover + .aplayer-info,
+.aplayer.aplayer-fixed:hover .aplayer-info {
+  display: flex !important;
+}
+
+/* --- lrc 歌词 --- */
+.aplayer .aplayer-lrc {
+  color: #D2D2D2 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5) !important;
+}
+
+.aplayer .aplayer-lrc p.aplayer-lrc-current {
+  color: #18D1FF !important;
+}
+
+/* --- loading --- */
+.aplayer .aplayer-loading-wrapper circle {
+  stroke: #18D1FF !important;
+}
+
+/* --- 移动端 --- */
+@media (max-width: 768px) {
+  .aplayer {
+    max-width: calc(100vw - 16px) !important;
+  }
+}

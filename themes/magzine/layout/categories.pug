@@ -1,0 +1,114 @@
+//- Categories Page - 支持展开式和跳转式两种布局
+
+//- 文章卡片 mixin
+mixin postItem(post)
+  .post-item
+    .post-item-inner
+      .post-item-title
+        a(href=url_for(post.path))= post.title
+      .post-item-meta
+        .post-meta-left
+          span.post-date
+            i.far.fa-calendar
+            |  #{date(post.date, "YYYY-MM-DD")}
+        .post-meta-right
+          a.read-more(href=url_for(post.path))
+            | 阅读全文
+            i.fas.fa-arrow-right
+
+//- 空状态 mixin
+mixin emptyState(icon, title, desc, showButton)
+  .empty-state
+    i.fas(class=icon)
+    h3= title
+    p= desc
+    if showButton
+      a.button(href="/") 返回首页
+
+//- 分类描述 mixin
+mixin categoryDesc(count)
+  .category-description
+    span 共有
+    |  #{count}
+    span 篇文章
+
+.post-wrapper
+  article.post-container
+    .post-header
+      h1.post-title= page.title || 'Categories'
+      .post-subtitle= theme.categories.layout === 'accordion' ? '所有分类' : '浏览所有分类'
+
+    .categories-content
+      if page.category
+        //- 特定分类的文章列表
+        .category-posts
+          .category-header
+            .category-info
+              h2.category-name
+                i.fas.fa-folder
+                |  #{page.category}
+              +categoryDesc(page.posts ? page.posts.length : 0)
+            .category-back
+              a(href="/categories/")
+                i.fas.fa-arrow-left
+                |  返回所有分类
+
+          if page.posts && page.posts.length
+            .post-list
+              each post in page.posts.toArray()
+                +postItem(post)
+          else
+            .no-posts
+              +emptyState('fa-inbox', '该分类下暂无文章', '尝试浏览其他分类或返回首页', true)
+
+      else if theme.categories.layout === 'accordion'
+        //- 展开式分类布局
+        if site.categories && site.categories.length
+          - var sortedCategories = site.categories.toArray().sort((a, b) => (b.posts ? b.posts.length : 0) - (a.posts ? a.posts.length : 0))
+          .categories-accordion
+            each category in sortedCategories
+              if category.posts && category.posts.length || theme.categories.show_empty_categories
+                - var count = category.posts ? category.posts.length : 0
+                - var size = count > 10 ? 'large' : count > 5 ? 'medium' : 'small'
+                .category-section(class="category-section--" + size, data-category=category.name)
+                  .category-header
+                    .category-info
+                      h2.category-name
+                        i.fas.fa-folder
+                        |  #{category.name}
+                      +categoryDesc(count)
+                    .category-toggle
+                      i.fas.fa-chevron-down
+
+                  if category.posts && category.posts.length
+                    .category-posts(style="display: none;")
+                      .post-list
+                        each post in category.posts.toArray()
+                          +postItem(post)
+                  else
+                    .no-posts(style="display: none;")
+                      +emptyState('fa-inbox', '该分类下暂无文章', '尝试浏览其他分类', false)
+        else
+          .no-categories
+            +emptyState('fa-folder', '暂无分类', '开始为您的文章添加分类', true)
+
+      else
+        //- 跳转式分类布局 - 分类云
+        if site.categories && site.categories.length
+          - var sortedCategories = site.categories.toArray().sort((a, b) => (b.posts ? b.posts.length : 0) - (a.posts ? a.posts.length : 0))
+          .categories-cloud
+            each category in sortedCategories
+              if category.posts && category.posts.length || theme.categories.show_empty_categories
+                - var count = category.posts ? category.posts.length : 0
+                - var size = count > 10 ? 'large' : count > 5 ? 'medium' : 'small'
+                a.category-cloud-item(class="category-cloud-item--" + size, href=url_for(category.path))
+                  .category-card-top
+                    i.fas.fa-folder
+                    span.category-name= category.name
+                  span.category-count= count
+                  .category-card-arrow
+                    span 查看文章
+                    i.fas.fa-arrow-right
+        else
+          .no-categories
+            +emptyState('fa-folder', '暂无分类', '开始为您的文章添加分类', true)
