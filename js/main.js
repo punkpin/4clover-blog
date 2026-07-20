@@ -22,17 +22,26 @@ function initTypingEffect() {
   const typingElement = document.getElementById("typing-text");
   if (!typingElement) return;
 
-  // Get typing text from theme config or use default
-  const typingText =
-    typingElement.getAttribute("data-text") || "Welcome to my blog";
+  // Parse JSON array from data attribute
+  let sentences = [];
+  try {
+    sentences = JSON.parse(typingElement.getAttribute("data-text"));
+  } catch (e) {
+    sentences = ["Welcome to my blog"];
+  }
+  if (!Array.isArray(sentences) || sentences.length === 0) {
+    sentences = ["Welcome to my blog"];
+  }
+
   const typingSpeed = parseInt(typingElement.getAttribute("data-speed")) || 100;
   const deleteSpeed =
     parseInt(typingElement.getAttribute("data-delete-speed")) || 50;
   const pauseDuration =
     parseInt(typingElement.getAttribute("data-pause")) || 2000;
-  const shouldLoop = typingElement.getAttribute("data-loop") === "true";
+  const shouldLoop = typingElement.getAttribute("data-loop") !== "false";
 
-  let i = 0;
+  let sentenceIndex = 0; // which sentence we're on
+  let charIndex = 0;     // position within current sentence
   let isDeleting = false;
   let isPaused = false;
 
@@ -43,31 +52,42 @@ function initTypingEffect() {
       return;
     }
 
-    if (!isDeleting) {
-      typingElement.textContent = typingText.substring(0, i + 1);
-      i++;
+    const currentText = sentences[sentenceIndex];
 
-      if (i === typingText.length) {
+    if (!isDeleting) {
+      // Typing forward
+      charIndex++;
+      typingElement.textContent = currentText.substring(0, charIndex);
+
+      if (charIndex === currentText.length) {
+        // Finished typing this sentence
         isPaused = true;
         setTimeout(() => {
-          if (shouldLoop) {
-            isDeleting = true;
-            typeWriter();
-          }
+          isDeleting = true;
+          typeWriter();
         }, pauseDuration);
         return;
       }
     } else {
-      typingElement.textContent = typingText.substring(0, i - 1);
-      i--;
+      // Deleting backward
+      charIndex--;
+      typingElement.textContent = currentText.substring(0, charIndex);
 
-      if (i === 0) {
+      if (charIndex === 0) {
+        // Finished deleting, move to next sentence
         isDeleting = false;
         isPaused = true;
+
+        if (sentenceIndex < sentences.length - 1) {
+          sentenceIndex++;
+        } else if (shouldLoop) {
+          sentenceIndex = 0;
+        } else {
+          return; // Stop after last sentence if not looping
+        }
+
         setTimeout(() => {
-          if (shouldLoop) {
-            typeWriter();
-          }
+          typeWriter();
         }, pauseDuration / 2);
         return;
       }
