@@ -42,7 +42,7 @@
 <link rel="stylesheet" href="/css/article-modal.css">
 
 <link rel="stylesheet" href="/css/music-player.css">
-<!-- 条件加载关于页面样式--><style>:root {
+<style>:root {
   --primary-color: #D2D2D2;
   --secondary-color: #898989;
   --accent-color: #18D1FF;
@@ -646,16 +646,22 @@ body.dark-mode .code-block code {
   description: 人生而自由，却无往不在枷锁之中</code></pre><li>贵站没有违法内容</li><li>您可以使用以下模板在评论区申请：</li><pre class="code-block"><code>- name: 
   link: 
   avatar: 
-  description: </code></pre></ol><p>我会常去串门的😊~</p></div></div></div><!-- 评论区域--><div class="comments-section"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>twikoo.init({
-  envId: 'https://blog-twitoo.vercel.app',
-  el: '#twikoo',
-  region: '',
-  path: 'window.location.pathname',
-  visitor: true,
-  onCommentLoaded: function () {
-    console.log('Twikoo评论加载成功');
+  description: </code></pre></ol><p>我会常去串门的😊~</p></div></div></div><!-- 评论区域--><div class="comments-section"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>(function initTwikoo() {
+  if (typeof twikoo === 'undefined') {
+    setTimeout(initTwikoo, 200);
+    return;
   }
-});</script></div></div></main></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2026 晴空四叶草. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-badges"><a target="_blank" rel="noopener" href="https://hexo.io/" title="博客框架为Hexo"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo"/></a><a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></div></div></footer></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  twikoo.init({
+    envId: 'https://blog-twitoo.vercel.app',
+    el: '#twikoo',
+    region: '',
+    path: 'window.location.pathname',
+    visitor: true,
+    onCommentLoaded: function () {
+      console.log('Twikoo评论加载成功');
+    }
+  });
+})();</script></div></div></main></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2026 晴空四叶草. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-badges"><a target="_blank" rel="noopener" href="https://hexo.io/" title="博客框架为Hexo"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo"/></a><a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></div></div></footer></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
   // 【修改点 2】底部脚本：同样逻辑，默认为 true
   var savedDarkMode = localStorage.getItem('darkMode');
   var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';

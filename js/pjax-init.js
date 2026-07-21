@@ -1,56 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
   if (typeof Pjax === "undefined") return;
 
-  const pjax = new Pjax({
-    // 拦截普通链接
+  var pjax = new Pjax({
     elements:
       "a:not([target='_blank']):not([href^='#']):not([data-pjax-state=''])",
-    selectors: [
-      "title", // 更新标题
-      "main.main", // 只替换主内容区
-      ".nav-menu", // 更新导航栏状态
-    ],
+    selectors: ["title", "main.main"],
     cacheBust: false,
     timeout: 5000,
   });
 
-  // 1. 页面开始请求：可以加个透明度过渡动画
   document.addEventListener("pjax:send", function () {
-    const main = document.querySelector("main.main");
+    var main = document.querySelector("main.main");
     if (main) {
-      main.style.transition = "opacity 0.3s ease";
+      main.style.transition = "opacity 0.2s ease";
       main.style.opacity = "0.4";
     }
   });
 
-  // 2. ★★★ 黑魔法：页面替换完成后的全局唤醒 ★★★
   document.addEventListener("pjax:complete", function () {
-    const main = document.querySelector("main.main");
+    var main = document.querySelector("main.main");
     if (main) main.style.opacity = "1";
 
-    // 魔法 1：重新触发所有的 DOMContentLoaded 事件
-    // 绝大多数的普通脚本（比如你的 tags.js、部分主题自带 JS）只要收到这个事件就会重新干活
-    window.dispatchEvent(new Event("DOMContentLoaded"));
+    var currentPath = window.location.pathname;
 
-    // 魔法 2：触发 load 事件，部分依赖页面完全加载的脚本需要这个
-    window.dispatchEvent(new Event("load"));
+    // 导航高亮
+    document.querySelectorAll(".nav-item").forEach(function (item) {
+      var link = item.querySelector("a");
+      if (!link) { item.classList.remove("active"); return; }
+      var href = link.getAttribute("href");
+      if (href === "/" && currentPath === "/") item.classList.add("active");
+      else if (href !== "/" && currentPath.startsWith(href)) item.classList.add("active");
+      else item.classList.remove("active");
+    });
 
-    // 魔法 3：重新执行 AI 脚本或特定的外部依赖
-    // 如果你有 MathJax (数学公式)
-    if (typeof MathJax !== "undefined" && MathJax.typesetPromise) {
-      MathJax.typesetPromise();
+    // 关于页动态注入/移除 about.css
+    var aboutCss = document.getElementById('about-dynamic-css');
+    if (currentPath === '/about/' || currentPath.startsWith('/about/')) {
+      if (!aboutCss) {
+        aboutCss = document.createElement('link');
+        aboutCss.id = 'about-dynamic-css';
+        aboutCss.rel = 'stylesheet';
+        aboutCss.href = '/css/about.css';
+        document.head.appendChild(aboutCss);
+      }
+    } else {
+      if (aboutCss) aboutCss.remove();
     }
 
-    // 如果你有 Twikoo 评论，强制它在新的容器里重新加载
-    if (typeof twikoo !== "undefined") {
-      try {
-        twikoo.init({
-          envId: window.theme.comments.twikoo.envId, // 你的envId
-          el: "#twikoo", // 评论容器
-        });
-      } catch (e) {}
-    }
-
-    // 如果你引用的 AI 摘要脚本暴露了重载方法，直接调用（大部分会自动响应 DOMContentLoaded）
+    // 只派发 DOMContentLoaded（仅 document，不派发 load 避免性能问题）
+    document.dispatchEvent(new Event("DOMContentLoaded"));
   });
 });

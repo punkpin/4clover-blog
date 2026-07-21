@@ -113,8 +113,9 @@ function initSmoothScroll() {
     });
   }
 
-  // Smooth scroll for all anchor links
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  // Smooth scroll for all anchor links (PJAX 防重复)
+  document.querySelectorAll('a[href^="#"]:not([data-smoothed])').forEach((anchor) => {
+    anchor.setAttribute('data-smoothed', '');
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute("href"));
@@ -299,6 +300,8 @@ function initLazyLoading() {
 
 // ===== Button Container =====
 function initButtonContainer() {
+  // PJAX 防重复
+  if (document.querySelector(".button-container")) return document.querySelector(".button-container");
   // 创建按钮容器
   const buttonContainer = document.createElement("div");
   buttonContainer.className = "button-container";
@@ -318,6 +321,7 @@ function initButtonContainer() {
 
 // ===== Back to Top =====
 function initBackToTop() {
+  if (document.querySelector(".back-to-top")) return;
   const buttonContainer =
     document.querySelector(".button-container") || initButtonContainer();
 
@@ -469,6 +473,7 @@ function initGoToComments() {
   // 只在有评论区域时显示按钮
   if (!document.querySelector(".comments-section")) return;
 
+  if (document.querySelector(".go-to-comments")) return;
   const buttonContainer =
     document.querySelector(".button-container") || initButtonContainer();
 
@@ -514,6 +519,7 @@ function initGoToComments() {
 
 // ===== Dark Mode Toggle =====
 function initDarkMode() {
+  if (document.querySelector(".dark-mode-toggle")) return;
   const buttonContainer =
     document.querySelector(".button-container") || initButtonContainer();
 

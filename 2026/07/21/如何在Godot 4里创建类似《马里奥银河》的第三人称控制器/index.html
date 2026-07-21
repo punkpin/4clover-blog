@@ -1,0 +1,670 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="theme-color" content="#D2D2D2"><meta name="msapplication-navbutton-color" content="#D2D2D2"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><title>晴空四叶草</title><script>(function() {
+  // 强制默认暗色模式，每次页面加载都启用
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : true;
+
+  if (shouldBeDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script><script>if (window.parent !== window) {
+  document.documentElement.classList.add('is-iframe');
+}
+</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="icon" href="/images/favicon.ico">
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="/css/tags.css">
+
+<link rel="stylesheet" href="/css/categories.css">
+
+<link rel="stylesheet" href="/css/highlight.css">
+
+<link rel="stylesheet" href="/css/toc.css">
+
+<link rel="stylesheet" href="/css/image-zoom.css">
+
+<link rel="stylesheet" href="/css/share.css">
+
+<link rel="stylesheet" href="/css/mobile-nav.css">
+
+<link rel="stylesheet" href="/css/search.css">
+
+<link rel="stylesheet" href="/css/scrollbar.css">
+
+<link rel="stylesheet" href="/css/timeline.css">
+
+<link rel="stylesheet" href="/css/animations.css">
+
+<link rel="stylesheet" href="/css/ai-theme.css">
+
+<link rel="stylesheet" href="/css/loading-animation.css">
+
+<link rel="stylesheet" href="/css/article-modal.css">
+
+<link rel="stylesheet" href="/css/music-player.css">
+<style>:root {
+  --primary-color: #D2D2D2;
+  --secondary-color: #898989;
+  --accent-color: #18D1FF;
+  --background-color: #000000;
+  --text-color: #D2D2D2;
+  --overlay-color: rgba(0, 0, 0, 0.85);
+  --tag-background-color: #14191D;
+  --card-background-color: #14191D;
+}
+</style><link rel="stylesheet" href="https://cdn1.tianli0.top/gh/qxchuckle/Post-Summary-AI/chuckle-post-ai.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css"><link rel="stylesheet" href="/css/meting-dark.css"><meta name="generator" content="Hexo 8.1.2"></head><body><div class="blog-cover" id="blog-cover"><div class="cover-bg" id="cover-bg-container"><canvas class="bg-slide active" id="refraction-canvas-1"></canvas><canvas class="bg-slide" id="refraction-canvas-2"></canvas><div class="cover-overlay"></div></div><div class="cover-content"><h1 class="cover-title" id="animated-title"></h1><p class="cover-author" id="animated-author"> </p></div><div class="cover-start-btn" id="start-journey"><span id="start-journey-text"> </span><i class="fas fa-chevron-down bouncing-arrow"></i></div></div><script>(function() {
+  var cover = document.getElementById('blog-cover');
+  if (!cover) return;
+  
+  // 如果当前是在 iframe/模态窗口中，或者用户已经点过“开始旅行”了
+  if (window.self !== window.top || sessionStorage.getItem('hasSeenCover') === 'true') {
+    // 立即隐藏，避免任何闪烁和遮挡
+    cover.style.display = 'none';
+  } else {
+    // 否则锁定背景滚动，等待动画模块加载
+    document.body.style.overflow = 'hidden';
+  }
+})();
+</script><style>.blog-cover {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 9999999; display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1); 
+  overflow: hidden; background: #000;
+}
+.blog-cover.slide-up { transform: translateY(-100%); }
+
+.cover-bg {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
+}
+
+.bg-slide {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1.5s ease-in-out; 
+}
+.bg-slide.active { opacity: 1; }
+
+.cover-overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4); z-index: 2; pointer-events: none;
+}
+
+.cover-content { text-align: center; z-index: 10; pointer-events: none; }
+
+.cover-title, .cover-author {
+  font-family: var(--font-secondary, 'Playfair Display', serif);
+  margin: 0;
+  color: var(--accent-color, #ff6b6b);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.cover-title { font-size: 4rem; letter-spacing: 5px; font-weight: 800; }
+.cover-author { font-size: 2rem; letter-spacing: 3px; font-weight: 500; margin-top: 25px; }
+
+.pop-wrapper {
+  display: inline-block; opacity: 0; transform: scale(0.3) translateY(30px);
+  animation: pop-in 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.wave-inner {
+  display: inline-block;
+  animation: wave-jitter 2.5s ease-in-out infinite;
+}
+
+.cover-start-btn {
+  position: absolute; bottom: 50px; display: flex; flex-direction: column;
+  align-items: center; color: #fff; cursor: pointer; z-index: 10;
+  transition: color 0.3s ease, transform 0.3s ease; pointer-events: auto;
+  padding: 10px 20px;
+}
+.cover-start-btn:hover { color: var(--accent-color, #ff6b6b); transform: scale(1.05); }
+.cover-start-btn span {
+  font-size: 1.2rem; margin-bottom: 10px; font-weight: 500;
+  letter-spacing: 2px; text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+.bouncing-arrow { font-size: 2.5rem; animation: float-bounce 2s infinite; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+
+@keyframes pop-in { to { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes wave-jitter {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-12px); opacity: 0.35; }
+}
+@keyframes float-bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-15px); }
+  60% { transform: translateY(-7px); }
+}
+
+/* ★★★ 手机端适配修改 ★★★ */
+@media (max-width: 768px) {
+  .cover-title { font-size: 2rem; letter-spacing: 2px; }
+  .cover-author { font-size: 1.2rem; margin-top: 15px; }
+  .bouncing-arrow { font-size: 2rem; }
+  
+  .cover-start-btn { 
+    bottom: 12vh; /* 调高按钮，防止被手机浏览器底部导航栏遮挡 */
+    padding: 20px 40px; /* 增大点击热区 */
+  }
+  .cover-start-btn span { font-size: 1rem; }
+}
+</style><script type="module">// 只有当封面没有被前置脚本 display: none 掉时，才加载沉重的 WebGL 引擎
+const cover = document.getElementById('blog-cover');
+if (cover && cover.style.display !== 'none') {
+  const startBtn = document.getElementById('start-journey');
+  
+  import('https://cdn.jsdelivr.net/npm/threejs-components@0.0.30/build/backgrounds/liquid1.min.js').then((module) => {
+    const LiquidBackground = module.default;
+
+    // ★★★ 动态读取配置文件中的轮播图数组，如果没配提供默认图 ★★★
+    const coverImages = ["/images/10.png","/images/14.png","/images/15.png","/images/13.jpg"];
+    
+    const canvas1 = document.getElementById('refraction-canvas-1');
+    const canvas2 = document.getElementById('refraction-canvas-2');
+    
+    const setupApp = (canvas) => {
+      const app = LiquidBackground(canvas);
+      app.liquidPlane.material.metalness = 0.35;
+      app.liquidPlane.material.roughness = 0.45;
+      app.liquidPlane.uniforms.displacementScale.value = 2;
+      app.setRain(false);
+      return app;
+    }
+
+    const app1 = setupApp(canvas1);
+    const app2 = setupApp(canvas2);
+
+    let currentSlide = 0;
+    let activeApp = 1;
+    
+    if (coverImages.length > 0) {
+      app1.loadImage(coverImages[0]);
+    }
+    if (coverImages.length > 1) {
+      app2.loadImage(coverImages[1]);
+    }
+
+    let slideTimer = null;
+    if (coverImages.length > 1) {
+      slideTimer = setInterval(() => {
+        const nextSlide = (currentSlide + 1) % coverImages.length;
+        
+        if (activeApp === 1) {
+          canvas1.classList.remove('active');
+          canvas2.classList.add('active');
+          activeApp = 2;
+          setTimeout(() => app1.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        } else {
+          canvas2.classList.remove('active');
+          canvas1.classList.add('active');
+          activeApp = 1;
+          setTimeout(() => app2.loadImage(coverImages[(nextSlide + 1) % coverImages.length]), 1500);
+        }
+        currentSlide = nextSlide;
+      }, 5000); 
+    }
+
+    // 绑定关闭封面的事件 (兼容电脑点击和手机触摸)
+    const closeCover = (e) => {
+      if (e && e.cancelable) e.preventDefault();
+      cover.classList.add('slide-up');
+      sessionStorage.setItem('hasSeenCover', 'true');
+      document.body.style.overflow = '';
+      
+      setTimeout(() => {
+        cover.style.display = 'none';
+        if (slideTimer) clearInterval(slideTimer);
+        if (app1.dispose) app1.dispose();
+        if (app2.dispose) app2.dispose();
+      }, 800);
+    };
+
+    startBtn.addEventListener('click', closeCover);
+    startBtn.addEventListener('touchstart', closeCover, { passive: false });
+  });
+
+  // =======================
+  // ★ 翻译处理：向全局 lang-switch 请求数据 ★
+  // =======================
+  const splitAndAnimateText = (text, container, popBaseDelay = 0) => {
+    container.innerHTML = ''; // 清空内容
+    text.split('').forEach((char, index) => {
+      if (char === ' ') {
+        const space = document.createElement('span');
+        space.innerHTML = '&nbsp;';
+        container.appendChild(space);
+        return;
+      }
+      const wrapper = document.createElement('span');
+      wrapper.className = 'pop-wrapper';
+      wrapper.style.animationDelay = `${popBaseDelay + index * 0.05}s`;
+      
+      const inner = document.createElement('span');
+      inner.textContent = char;
+      inner.className = 'wave-inner';
+      inner.style.animationDelay = `${index * 0.15}s`; 
+      
+      wrapper.appendChild(inner);
+      container.appendChild(wrapper);
+    });
+  };
+
+  // ★★★ 从配置文件动态获取文字 (依然保留原先的语言翻译支持机制) ★★★
+  const configTitle = "欢迎来到晴空四叶草的秘密基地";
+  const configAuthor = "晴空四叶草";
+  const configBtn = "开始你的旅行";
+
+  // 稍微延迟 100ms 等待 lang-switch 注册好全局 window.i18n
+  setTimeout(() => {
+    const titleStr = (window.i18n && window.i18n.get) ? window.i18n.get(configTitle) : configTitle;
+    const authorStr = (window.i18n && window.i18n.get) ? window.i18n.get(configAuthor) : configAuthor;
+    const btnStr = (window.i18n && window.i18n.get) ? window.i18n.get(configBtn) : configBtn;
+
+    document.getElementById('start-journey-text').textContent = btnStr;
+    splitAndAnimateText(titleStr, document.getElementById('animated-title'), 0);
+    splitAndAnimateText(authorStr, document.getElementById('animated-author'), 0.5);
+  }, 100);
+}</script><div id="app"><header class="header navbar-bubble"><nav class="nav"><div class="nav-container"><div class="nav-logo"><a href="/"><span class="nav-title">晴空四叶草</span></a></div><div class="nav-menu"><a class="nav-item" href="/">首页</a><a class="nav-item" href="/about/">关于</a><a class="nav-item" href="/archives/">归档</a><a class="nav-item" href="/categories/">分类</a><a class="nav-item" href="/tags/">标签</a><a class="nav-item" href="/link/">友链</a><a class="nav-item" href="/murmur/">碎碎念</a><a class="nav-item" href="#lang-switch">Language</a><div class="nav-item has-submenu"><span class="nav-link">网站</span><div class="submenu"><a class="submenu-item" target="_blank" rel="noopener" href="https://punkpin.github.io/">旧博客（2024—2026）</a></div></div><!-- 搜索按钮--><div class="search-toggle"><i class="fas fa-search"></i></div></div><div class="nav-toggle"><span></span><span></span><span></span></div></div></nav></header><div class="theme-color-picker-container"><label for="theme-color-picker" data-title="自定义主题色"><i class="fas fa-palette"></i></label><input type="color" id="theme-color-picker" value="#18D1FF"/></div><style>.theme-color-picker-container {
+  position: fixed;
+  top: 85px; /* 位于导航栏下方 */
+  right: 20px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  background: var(--card-background-color, #ffffff);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-color-picker-container:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.theme-color-picker-container label {
+  cursor: pointer;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  position: relative; /* 为 tooltip 提供定位参照 */
+}
+
+/* ★★★ 调色板提示框 (Tooltip) 向左弹出 ★★★ */
+.theme-color-picker-container label::after {
+  content: attr(data-title);
+  position: absolute;
+  right: 125%; /* 从左侧弹出，避免溢出屏幕右侧 */
+  top: 50%;
+  transform: translateY(-50%) scale(0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 10010;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  line-height: normal;
+  font-family: var(--font-primary, sans-serif);
+}
+
+.theme-color-picker-container label:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) scale(1);
+  right: 115%;
+}
+
+#theme-color-picker {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+/* 暗色模式适配 */
+body.dark-mode .theme-color-picker-container {
+  background: #262626;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 移动端隐藏提示框，防止触屏残留 */
+@media (max-width: 768px) {
+  .theme-color-picker-container label::after { display: none !important; }
+}
+</style><script>// 1. 立即执行脚本：页面一加载就读取用户保存的颜色，防止颜色闪烁 (FOUC)
+(function() {
+  var savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    document.documentElement.style.setProperty('--accent-color', savedColor);
+  }
+})();
+
+// 2. DOM加载完成后绑定调色板事件
+document.addEventListener('DOMContentLoaded', function() {
+  const colorPicker = document.getElementById('theme-color-picker');
+  const root = document.documentElement;
+  
+  // 初始化颜色选择器的UI显示值
+  const savedColor = localStorage.getItem('custom-accent-color');
+  if (savedColor) {
+    colorPicker.value = savedColor;
+  }
+
+  // 监听：颜色面板拖动时（实时更新整个网站的颜色）
+  colorPicker.addEventListener('input', function(e) {
+    const newColor = e.target.value;
+    root.style.setProperty('--accent-color', newColor);
+    
+    // ★ 修复 Bug：如果在 iframe 模态框中修改颜色，实时同步给主窗口(父界面)
+    if (window.self !== window.top) {
+      try {
+        window.top.document.documentElement.style.setProperty('--accent-color', newColor);
+        const parentPicker = window.top.document.getElementById('theme-color-picker');
+        if (parentPicker) parentPicker.value = newColor;
+      } catch(err) {
+        // 忽略跨域错误
+      }
+    }
+  });
+
+  // 监听：颜色选择完毕关闭面板时（保存到浏览器缓存，下次打开依然有效）
+  colorPicker.addEventListener('change', function(e) {
+    const newColor = e.target.value;
+    localStorage.setItem('custom-accent-color', newColor);
+  });
+
+  // ★ 修复 Bug：监听 localStorage 变化。如果主页颜色改变，通知到所有开启的模态框 iframe 或者 其他标签页
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'custom-accent-color' && e.newValue) {
+      root.style.setProperty('--accent-color', e.newValue);
+      if (colorPicker) colorPicker.value = e.newValue;
+    }
+  });
+});</script><div class="search-overlay"><div class="search-container"><div class="search-form"><input class="search-input" type="text" placeholder="搜索文章..."/><div class="search-close">×</div></div><div class="search-results"></div></div></div><main class="main"><div class="post-wrapper"><div class="toc-sidebar"><div class="toc-container"><div class="toc-title">目录</div><div class="toc-content" id="table-of-contents"><!-- Table of contents will be generated by JavaScript--></div></div></div><article class="post-container"><div class="post-header"><div class="post-cover"><img src="https://files.seeusercontent.com/2026/07/21/g1Tm/04rQ7uhK3XVvRCnUs39JGrh-1fit_sca.webp" alt="如何在Godot 4里创建类似《马里奥银河》的第三人称控制器"/></div><div class="post-meta"><div class="post-category"><i class="fas fa-folder-open" style="margin-right: 5px"></i><a href="/categories/Godot-%E6%95%99%E7%A8%8B/">Godot 教程</a></div><div class="post-date"><i class="far fa-calendar-alt" style="margin-right: 5px"></i><time datetime="2026-07-21T15:10:00.000Z">2026-07-21</time></div><div class="post-author"><i class="fas fa-user" style="margin-right: 5px"></i><span>4clover</span></div><div class="post-wordcount"><i class="fas fa-file-word" style="margin-right: 5px"></i><span>4.3k</span><span style="margin-left: 3px">字</span></div><div class="post-readtime"><i class="fas fa-clock" style="margin-right: 5px"></i><span>17</span><span style="margin-left: 3px">分钟</span></div></div><h1 class="post-title">如何在Godot 4里创建类似《马里奥银河》的第三人称控制器</h1><div class="post-tags"><a class="tag" href="/tags/Godot/"><i class="fas fa-tag" style="margin-right: 3px"> </i>Godot</a><a class="tag" href="/tags/%E6%95%99%E7%A8%8B/"><i class="fas fa-tag" style="margin-right: 3px"> </i>教程</a></div></div><!-- AI摘要模块容器--><div id="post-ai-container"></div><div class="post-content"><h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><p><img src="https://files.seeusercontent.com/2026/07/19/ggX2/2026-07-19-22-58-46-1.gif" alt="2026-07-19-22-58-46 (1).gif"></p>
+<hr>
+<h2 id="一、需求拆解"><a href="#一、需求拆解" class="headerlink" title="一、需求拆解"></a>一、需求拆解</h2><p>首先，控制器包含两个各方面：character的控制和摄像机的控制</p>
+<p>先想清楚有哪些功能需要实现：</p>
+<ul>
+<li>按 WASD 在球面上移动，且<br>移动方向是”相对于摄像机”的——按 W 就是往屏幕深处走，按 A 就是往屏幕左边走</li>
+<li>按空格跳跃，可以在空中再跳一次（二段跳）</li>
+<li>移动鼠标可以旋转视角，上下左右都能看，但上下俯仰角度限制（防止穿模）</li>
+<li>不管走到球的哪个位置，脚都稳稳踩在球面上</li>
+</ul>
+<p>把上面的描述拆成技术问题，我们会得到四个模块：</p>
+<ol>
+<li><strong>球面重力</strong> — 平地上重力方向不变，球面上每个点都不一样</li>
+<li><strong>球面移动</strong> — “前方”是摄像机决定的，要投影到球面上</li>
+<li><strong>身体对齐</strong> — 走到球的侧面或背面时，身体要跟着倾斜</li>
+<li><strong>摄像机</strong> — 跟随角色 + 鼠标旋转，还不能和角色的朝向互相打架</li>
+</ol>
+<p>顺序很重要：先做重力，再做移动，然后处理身体对齐，最后做摄像机。因为每一步都依赖上一步的结果。</p>
+<hr>
+<h2 id="二、搭建场景"><a href="#二、搭建场景" class="headerlink" title="二、搭建场景"></a>二、搭建场景</h2><p>在写代码之前，先把场景节点搭好。</p>
+<h3 id="2-1-星球"><a href="#2-1-星球" class="headerlink" title="2.1 星球"></a>2.1 星球</h3><p>创建一个 <code>Node3D</code> 作为根节点（我叫它 <code>TestScene</code>），然后加三个子节点：</p>
+<ul>
+<li><strong>MeshInstance3D</strong> — 用来显示星球的样子。用 <code>SphereMesh</code>，半径设为 6。</li>
+<li><strong>StaticBody3D</strong> — 让星球有碰撞体。在它下面放一个 <code>CollisionShape3D</code>，形状选 <code>SphereShape3D</code>，半径同样设为 6，和模型的半径一致。</li>
+<li><strong>DirectionalLight3D</strong> — 一个方向光，让场景亮起来。</li>
+</ul>
+<h3 id="2-2-角色"><a href="#2-2-角色" class="headerlink" title="2.2 角色"></a>2.2 角色</h3><p>角色做成独立场景方便复用。新建一个场景，根节点选 <code>CharacterBody3D</code>，命名为 <code>Player</code>。给它加两个子节点：</p>
+<ul>
+<li><strong>CollisionShape3D</strong> — 碰撞体。用 <code>CapsuleShape3D</code>（胶囊体），半径 0.3，高度 1.0。</li>
+<li><strong>MeshInstance3D</strong> — 角色外观。用 <code>CapsuleMesh</code>，参数和碰撞体一样。在它下面还可以再挂一个 <code>MeshInstance3D</code>（比如一个小方块当”鼻子”），用来区分角色的前后方向。</li>
+</ul>
+<p>保存为 <code>player.tscn</code>，然后把它拖进测试场景里，放在星球上方（位置大约 <code>(0, 6.5, 0)</code>）。</p>
+<h3 id="2-3-摄像机"><a href="#2-3-摄像机" class="headerlink" title="2.3 摄像机"></a>2.3 摄像机</h3><p>由于摄像机也要复用，所以摄像机最好也设为独立场景。新建一个场景，根节点用 <code>Node3D</code>，命名为 <code>CameraRig</code>。在它下面放一个 <code>Camera3D</code> 子节点。</p>
+<p><code>CameraRig</code> 只是一个容器节点——它本身不做任何显示，只负责”站在角色的位置上”和”响应鼠标旋转”。真正的摄像机是它的子节点 <code>Camera3D</code>，两者的位置关系是：<strong>rig 在角色身上，摄像机在 rig 的后上方</strong>。这就实现了第三人称视角。</p>
+<p>在编辑器中把 <code>Camera3D</code> 的 <code>current</code> 属性勾上，让它成为场景的活跃摄像机。位置设为 <code>(0, 1.5, 3)</code>，意思是站在 rig 后上方。</p>
+<p>保存为 <code>camera_rig.tscn</code>，拖进测试场景。</p>
+<h3 id="2-4-最终节点树"><a href="#2-4-最终节点树" class="headerlink" title="2.4 最终节点树"></a>2.4 最终节点树</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TestScene (Node3D)</span><br><span class="line">├── DirectionalLight3D</span><br><span class="line">├── MeshInstance3D          # 星球的外观</span><br><span class="line">├── StaticBody3D</span><br><span class="line">│   └── CollisionShape3D    # 星球的碰撞体</span><br><span class="line">├── Player (CharacterBody3D)</span><br><span class="line">│   ├── CollisionShape3D</span><br><span class="line">│   └── MeshInstance3D      # 胶囊体</span><br><span class="line">│       └── MeshInstance3D  # &quot;鼻子&quot;</span><br><span class="line">└── CameraRig (Node3D)</span><br><span class="line">    └── Camera3D            # 真正的摄像机，current=true</span><br></pre></td></tr></table></figure>
+
+<p>Player 和 CameraRig 是平级的兄弟节点，都在 TestScene 下面。它们之间没有父子关系——这点很重要，后面讲摄像机的时候会解释原因。</p>
+<hr>
+<h2 id="三、球面重力"><a href="#三、球面重力" class="headerlink" title="三、球面重力"></a>三、球面重力</h2><p>平时做 3D 角色，重力简单得很：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">velocity.y -= gravity * delta</span><br></pre></td></tr></table></figure>
+
+<p>因为地面是平的，”下”永远是世界坐标的 -Y 方向。</p>
+<p>但现在地面是一个球。”下”不再是固定方向——站在球的顶部时，下是 -Y；走到侧面时，下变成了 XZ 方向；走到球的底部时，下甚至变成了 +Y。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>把”下”定义成<strong>从角色指向星球中心的方向</strong>。因为星球放在原点 <code>(0, 0, 0)</code>，所以：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">重力方向 = (角色位置 → 原点).归一化()</span><br><span class="line">脚底法线 = -重力方向  # &quot;上&quot;就是&quot;下&quot;的反方向</span><br></pre></td></tr></table></figure>
+
+<p>每一帧都要重新算——因为角色在动，位置变了，重力方向也跟着变。</p>
+<p>Godot 的 <code>CharacterBody3D</code> 有一个内置属性叫 <code>up_direction</code>。只要把每一帧的”上”写进去，<code>is_on_floor()</code>（判断落地）和 <code>move_and_slide()</code>（移动）都会自动适配，不需要自己重写任何东西。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>在 <code>player.gd</code> 里：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">extends CharacterBody3D</span><br><span class="line"></span><br><span class="line">const PLANET_CENTER := Vector3.ZERO  # 星球在原点</span><br><span class="line"></span><br><span class="line">@export var gravity := 24.0</span><br><span class="line"></span><br><span class="line">func _physics_process(delta: float) -&gt; void:</span><br><span class="line">    # 1. 这一帧的重力方向：从我指向星球中心</span><br><span class="line">    var gravity_direction := global_position.direction_to(PLANET_CENTER)</span><br><span class="line"></span><br><span class="line">    # 2. 脚底的&quot;上&quot;就是重力的反方向</span><br><span class="line">    var surface_up := -gravity_direction</span><br><span class="line"></span><br><span class="line">    # 3. 告诉引擎：这帧的&quot;上&quot;是这个方向</span><br><span class="line">    up_direction = surface_up</span><br><span class="line"></span><br><span class="line">    # 4. 重力加速度</span><br><span class="line">    velocity += gravity_direction * gravity * delta</span><br><span class="line"></span><br><span class="line">    # 5. 物理移动（自动适配 up_direction）</span><br><span class="line">    move_and_slide()</span><br></pre></td></tr></table></figure>
+
+<p><code>gravity</code> 用 <code>@export</code> 声明，后面加 <code>var</code>，这样就能在编辑器里直接调参数，不用每次改代码。</p>
+<hr>
+<h2 id="四、球面移动"><a href="#四、球面移动" class="headerlink" title="四、球面移动"></a>四、球面移动</h2><p>玩家按 WASD 的时候，角色应该在”球面上的前后左右”移动。但 WASD 本身只是一组数字，需要我们把它翻译成世界空间里的移动方向。</p>
+<p>问题在于：”前”是什么？不应该是世界坐标的 +X 或 -Z，而应该是<strong>玩家在屏幕上看到的”前”</strong>。也就是摄像机正在看的方向。</p>
+<p>但摄像机在球体外面，它的视线是斜向下的。如果直接把摄像机的朝向拿来用，角色会被”按进”球里。我们需要的是：<strong>摄像机朝向在球面上的投影</strong>——去掉斜向下的分量，只保留贴在球面上的分量。</p>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><p>分成三步：</p>
+<p><strong>第一步：获取摄像机朝向，投影到球面。</strong></p>
+<p><code>-camera.basis.z</code> 是摄像机的前方向量。然后调用 <code>.slide(surface_up)</code>，这个方法会把向量里”沿法线方向”的那部分砍掉，剩下的就是贴在球面上的部分。</p>
+<p>可以这样理解：把一根铅笔斜靠在桌子上，铅笔是摄像机的视线方向，桌面是你的球面局部。<code>slide(桌面法线)</code> 得到的就是铅笔在桌面上的影子。这就是我们想要的”贴在球面上的前方”。</p>
+<p><strong>第二步：用投影后的方向 + 输入，算出移动方向。</strong></p>
+<p>有了”贴着球面的前方”和脚底法线，叉积一下就得到”贴着球面的右方”：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">右 = 前方.cross(脚底法线)</span><br><span class="line">移动方向 = 右 × 水平输入 + 前 × 垂直输入</span><br></pre></td></tr></table></figure>
+
+<p><strong>第三步：平滑加速。</strong></p>
+<p>如果速度瞬间从 0 跳到满速，手感会很差。用一个叫 <code>move_toward()</code> 的方法让当前速度逐步靠近目标速度，类似”踩油门慢慢提速”的感觉。</p>
+<h3 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h3><p>在 <code>_physics_process</code> 里调用这个方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">@export var move_speed := 5.0</span><br><span class="line">@export var move_acceleration := 30.0</span><br><span class="line"></span><br><span class="line">func handle_movement(delta: float, surface_up: Vector3) -&gt; void:</span><br><span class="line">    # 获取输入（A/D = 水平，W/S = 垂直）</span><br><span class="line">    var input := Input.get_vector(&quot;move_left&quot;, &quot;move_right&quot;, &quot;move_forward&quot;, &quot;move_back&quot;)</span><br><span class="line">    if input.length_squared() &lt; 0.001:</span><br><span class="line">        return  # 没按任何键，跳过</span><br><span class="line"></span><br><span class="line">    # 拿当前活跃的摄像机</span><br><span class="line">    var player_camera := get_viewport().get_camera_3d()</span><br><span class="line">    if player_camera == null:</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">    # 摄像机的&quot;前方&quot;，投影到球面上</span><br><span class="line">    var forward := -player_camera.global_transform.basis.z</span><br><span class="line">    forward = forward.slide(surface_up)</span><br><span class="line"></span><br><span class="line">    # 边缘情况：如果摄像机恰好在球的正背面，投影结果可能为零</span><br><span class="line">    if forward.length_squared() &lt; 0.001:</span><br><span class="line">        forward = -global_transform.basis.z</span><br><span class="line">        forward = forward.slide(surface_up)</span><br><span class="line"></span><br><span class="line">    forward = forward.normalized()</span><br><span class="line">    var right := forward.cross(surface_up).normalized()</span><br><span class="line"></span><br><span class="line">    # 组合出移动方向（注意：input.y 是 W/S，对应前后）</span><br><span class="line">    var move_direction := (right * input.x - forward * input.y).normalized()</span><br><span class="line">    var target_velocity := move_direction * move_speed</span><br><span class="line"></span><br><span class="line">    # 只处理&quot;贴着球面&quot;的速度，法线方向的速度不管</span><br><span class="line">    var sideways_velocity := velocity.slide(surface_up)</span><br><span class="line">    sideways_velocity = sideways_velocity.move_toward(target_velocity, move_acceleration * delta)</span><br><span class="line"></span><br><span class="line">    # 拼回去：切线速度 + 法线速度</span><br><span class="line">    velocity = sideways_velocity + surface_up * velocity.dot(surface_up)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、身体对齐"><a href="#五、身体对齐" class="headerlink" title="五、身体对齐"></a>五、身体对齐</h2><p>角色站在球顶时身体是直的，走到侧面时身体要横过来，走到球底时身体要完全倒过来。身体的”上”必须每帧重新对齐到脚底法线。</p>
+<h3 id="第一反应（有-bug）"><a href="#第一反应（有-bug）" class="headerlink" title="第一反应（有 bug）"></a>第一反应（有 bug）</h3><p>自然想到：每帧取出角色当前的朝向 → 投影到球面 → 更新旋转。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 直觉写法——但有问题</span><br><span class="line">var forward := -global_transform.basis.z    # 取当前朝向</span><br><span class="line">forward = forward.slide(surface_up)         # 投影</span><br><span class="line">forward = forward.normalized()</span><br><span class="line">global_transform.basis = Basis.looking_at(forward, surface_up)  # 更新旋转</span><br></pre></td></tr></table></figure>
+
+<p>逻辑通顺，代码干净。但跑起来之后你会发现：<strong>角色在没有按任何键的情况下，自己在原地缓慢旋转。</strong> 不是抖动，是缓缓地、持续地往一个方向转。</p>
+<h3 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h3><p>在脑子里把每一帧过一遍：</p>
+<ul>
+<li>第 1 帧：取朝向 → <code>slide()</code> 投影（产生极其微小的偏差，大概小数点后几位）→ 写回 <code>basis</code></li>
+<li>第 2 帧：取朝向（已经是”被微调过的”了）→ <code>slide()</code> 再投影（又偏差一丁点）→ 写回</li>
+<li>第 3 帧：取朝向（偏差已经累积了两帧）→ …</li>
+</ul>
+<p><strong>每帧的输出变成了下一帧的输入。</strong> <code>slide()</code> 和 <code>normalized()</code> 在数学上不是精确恒等的——每次运算会有浮点数级别的误差。单独看，这点误差完全可以忽略。但当误差被反复喂回循环，它就是滚雪球。</p>
+<p>打个比方：你把话筒对着音箱。一开始只有人耳听不到的电路噪声，但噪声被音箱放大 → 话筒收到放大后的噪声 → 再放大 → 再收 → 再放大……几轮之后就变成了尖锐的啸叫声。我们的代码也在做同样的事：把输出的微小偏差当输入再处理，偏差被反复”放大”。</p>
+<p><strong>根本矛盾：朝向变量同时扮演了”输入”和”输出”两个角色。</strong> 输入依赖输出，输出又变成输入，形成了闭环。</p>
+<p>这个是 3D 游戏物理和角色控制里极其隐蔽又非常经典的一个“坑”，在Unity里，我们经常冻结轴，就是强制将旋转速度归零来对抗这个误差。</p>
+<h3 id="怎么修"><a href="#怎么修" class="headerlink" title="怎么修"></a>怎么修</h3><p>把输入和输出拆开。拿一个独立变量 <code>surface_heading</code> 专门记录”我想要的朝向”。</p>
+<ul>
+<li>初始值：世界空间的 +Z 方向</li>
+<li>每帧：从这个变量出发做投影 → 把结果同时写回变量和角色的 basis</li>
+<li><strong>永远不从 <code>global_transform.basis</code> 里读朝向</strong></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var surface_heading := Vector3.FORWARD  # 独立维护，初始朝 +Z</span><br><span class="line"></span><br><span class="line">func align_to_surface(surface_up: Vector3) -&gt; void:</span><br><span class="line">    var forward := surface_heading.slide(surface_up)</span><br><span class="line">    if forward.length_squared() &lt; 0.001:</span><br><span class="line">        forward = Vector3.FORWARD.slide(surface_up)</span><br><span class="line">    forward = forward.normalized()</span><br><span class="line">    surface_heading = forward</span><br><span class="line">    global_transform.basis = Basis.looking_at(forward, surface_up)</span><br></pre></td></tr></table></figure>
+
+<p><code>surface_heading</code> 每帧只经过一次 <code>slide()</code>，不存在”自己的输出给自己当输入”的问题。循环断了。</p>
+<p>在 <code>_physics_process</code> 里调用它：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">func _physics_process(delta: float) -&gt; void:</span><br><span class="line">    var gravity_direction := global_position.direction_to(PLANET_CENTER)</span><br><span class="line">    var surface_up := -gravity_direction</span><br><span class="line"></span><br><span class="line">    up_direction = surface_up</span><br><span class="line">    align_to_surface(surface_up)           # ← 身体对齐</span><br><span class="line">    handle_movement(delta, surface_up)     # ← 移动</span><br><span class="line">    handle_jump(surface_up)               # ← 跳跃</span><br><span class="line"></span><br><span class="line">    velocity += gravity_direction * gravity * delta</span><br><span class="line">    move_and_slide()</span><br><span class="line"></span><br><span class="line">    if is_on_floor():</span><br><span class="line">        jumps_used = 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="这条经验的适用范围"><a href="#这条经验的适用范围" class="headerlink" title="这条经验的适用范围"></a>这条经验的适用范围</h3><p>不只是球面行走。任何时候如果你在做一个”把朝向投影到曲面”的操作，不管是球形、圆柱形、还是不规则地形——只要你的流程是”读取旋转 → 投影 → 写回旋转”，就会踩这个坑。解法都一样：<strong>输入和输出分开存，也就是解耦。</strong></p>
+<hr>
+<h2 id="六、摄像机"><a href="#六、摄像机" class="headerlink" title="六、摄像机"></a>六、摄像机</h2><p>摄像机要做三件事：</p>
+<ol>
+<li>跟着角色走（角色走到球背面，摄像机也要跟过去）</li>
+<li>响应鼠标——左右移动鼠标时旋转水平视角，上下移动时改变俯仰角</li>
+<li>不能和角色的朝向产生之前说的那种反馈循环</li>
+</ol>
+<h3 id="6-1-为什么-CameraRig-和-Camera3D-要分开"><a href="#6-1-为什么-CameraRig-和-Camera3D-要分开" class="headerlink" title="6.1 为什么 CameraRig 和 Camera3D 要分开"></a>6.1 为什么 CameraRig 和 Camera3D 要分开</h3><p>回到场景结构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CameraRig (Node3D)          ← 只有脚本，没有显示</span><br><span class="line">└── Camera3D                ← 真正的摄像机，偏移 (0, 1.5, 3)</span><br></pre></td></tr></table></figure>
+
+<p>这套”支架 + 摄像机”的组合有明确分工：</p>
+<ul>
+<li><strong>CameraRig</strong>：跟角色的位置同步，处理鼠标旋转，保持与球面对齐。你可以把它想成一个”站在角色肩膀上的透明架子”。</li>
+<li><strong>Camera3D</strong>：相对于支架偏移 <code>(0, 1.5, 3)</code>，提供了第三人称的距离感和高度。它自己不写代码，全靠父节点带着动。</li>
+</ul>
+<p>如果只有一个 Camera3D 挂在角色下面，就会出现一个问题：角色的旋转会影响摄像机。角色走一步身体一晃，视角就跟着晃，画面很难看。把摄像机从角色身上拆出来，用平级的 CameraRig 代替，视角就独立了。</p>
+<h3 id="6-2-为什么用-process-而不是-physics-process"><a href="#6-2-为什么用-process-而不是-physics-process" class="headerlink" title="6.2 为什么用 _process 而不是 _physics_process"></a>6.2 为什么用 <code>_process</code> 而不是 <code>_physics_process</code></h3><p>角色控制用的是 <code>_physics_process</code>，因为物理计算需要固定的时间步长。但摄像机用 <code>_process</code> 更合适——它是每帧渲染前执行，跟屏幕刷新率同步。摄像机的旋转和跟随不需要物理精度，画面流畅更优先。</p>
+<h3 id="6-3-鼠标旋转"><a href="#6-3-鼠标旋转" class="headerlink" title="6.3 鼠标旋转"></a>6.3 鼠标旋转</h3><p>我们希望的效果是：</p>
+<ul>
+<li>鼠标左右移动 → 摄像机绕着角色水平旋转（偏航）</li>
+<li>鼠标上下移动 → 摄像机抬头或低头（俯仰）</li>
+<li>俯仰不能太极端——不能低头看到地底下去，也不能抬头看到自己头顶</li>
+</ul>
+<p>Godot 里鼠标事件在 <code>_unhandled_input</code> 里接收。我们把鼠标移动量存下来，在 <code>_process</code> 里统一应用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var yaw_delta := 0.0       # 这一帧的水平旋转量</span><br><span class="line">var look_pitch := 0.0      # 当前的俯仰角（弧度）</span><br><span class="line"></span><br><span class="line">func _unhandled_input(event: InputEvent) -&gt; void:</span><br><span class="line">    if event is InputEventMouseMotion:</span><br><span class="line">        # 鼠标水平移动 → 积累偏航</span><br><span class="line">        yaw_delta -= event.relative.x * mouse_sensitivity</span><br><span class="line">        # 鼠标垂直移动 → 更新俯仰，但要限制范围</span><br><span class="line">        look_pitch = clampf(</span><br><span class="line">            look_pitch - event.relative.y * mouse_sensitivity,</span><br><span class="line">            deg_to_rad(min_pitch_degrees),   # 最低能看多少度（比如 -25°）</span><br><span class="line">            deg_to_rad(max_pitch_degrees)    # 最高能看多少度（比如 30°）</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+
+<p><code>InputEventMouseMotion</code> 的 <code>relative</code> 属性是这一帧鼠标移动的像素数。<code>yaw_delta</code> 是累加的——因为同一帧内可能有多个鼠标事件。在 <code>_process</code> 末尾把它清零，下帧重新开始。</p>
+<p>最后加一个按 Esc 释放鼠标的功能，方便测试时切出去：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">elif event.is_action_pressed(&quot;ui_cancel&quot;):</span><br><span class="line">    Input.mouse_mode = Input.MOUSE_MODE_VISIBLE</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-4-球面旋转"><a href="#6-4-球面旋转" class="headerlink" title="6.4 球面旋转"></a>6.4 球面旋转</h3><p>摄像机也需要和球面对齐——不能角色站在球面上，摄像机却用世界空间的”上”来旋转。</p>
+<p>和角色身体对齐的思路一样，摄像机也维护自己的独立朝向变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var camera_forward := Vector3.FORWARD</span><br><span class="line"></span><br><span class="line">func _process(delta: float) -&gt; void:</span><br><span class="line">    # 1. 跟着角色走</span><br><span class="line">    global_position = player.global_position</span><br><span class="line"></span><br><span class="line">    # 2. 计算脚底法线（和角色用同样的算法）</span><br><span class="line">    var surface_up := player.global_position.normalized()</span><br><span class="line"></span><br><span class="line">    # 3. 用自己的 camera_forward，不是角色的 basis</span><br><span class="line">    var forward := camera_forward.slide(surface_up).normalized()</span><br><span class="line"></span><br><span class="line">    # 4. 应用鼠标旋转：先在法线上旋转（水平），再在右方向上旋转（垂直）</span><br><span class="line">    forward = forward.rotated(surface_up, yaw_delta)</span><br><span class="line">    var right := surface_up.cross(forward).normalized()</span><br><span class="line">    forward = forward.rotated(right, look_pitch)</span><br><span class="line"></span><br><span class="line">    # 5. 更新朝向</span><br><span class="line">    global_transform.basis = Basis.looking_at(forward, surface_up)</span><br><span class="line">    camera_forward = forward</span><br><span class="line">    yaw_delta = 0.0  # 消费掉，下帧重新积累</span><br></pre></td></tr></table></figure>
+
+<p>注意第 3 步：用的是 <code>camera_forward</code>，不是 <code>player.global_transform.basis.z</code>。这和角色那边”不用自己的 basis”是同一个道理——切断输入和输出之间的循环。</p>
+<h3 id="6-5-角色和摄像机之间的关系"><a href="#6-5-角色和摄像机之间的关系" class="headerlink" title="6.5 角色和摄像机之间的关系"></a>6.5 角色和摄像机之间的关系</h3><p>它们共享位置：<code>camera_rig.global_position = player.global_position</code>。</p>
+<p>但朝向各自独立：角色有 <code>surface_heading</code>，摄像机有 <code>camera_forward</code>。谁也不读谁的 basis。</p>
+<p>角色身体对齐时，用了 <code>surface_heading</code>。摄像机旋转时，用了 <code>camera_forward</code>。它们唯一的联系是通过”位置”——摄像机跟着角色走——但不会通过”旋转”互相影响。</p>
+<h3 id="6-6-完整的-camera-rig-gd"><a href="#6-6-完整的-camera-rig-gd" class="headerlink" title="6.6 完整的 camera_rig.gd"></a>6.6 完整的 camera_rig.gd</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">extends Node3D</span><br><span class="line"></span><br><span class="line">@export_range(0.001, 0.01, 0.0005) var mouse_sensitivity := 0.003</span><br><span class="line">@export_range(-89.0, 0.0, 1.0) var min_pitch_degrees := -25.0</span><br><span class="line">@export_range(0.0, 89.0, 1.0) var max_pitch_degrees := 30.0</span><br><span class="line"></span><br><span class="line">@onready var player: CharacterBody3D = get_node(&quot;../Player&quot;)</span><br><span class="line"></span><br><span class="line">var yaw_delta := 0.0</span><br><span class="line">var look_pitch := 0.0</span><br><span class="line">var camera_forward := Vector3.FORWARD</span><br><span class="line"></span><br><span class="line">func _ready() -&gt; void:</span><br><span class="line">    global_position = player.global_position</span><br><span class="line">    camera_forward = -global_transform.basis.z</span><br><span class="line">    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED</span><br><span class="line"></span><br><span class="line">func _process(delta: float) -&gt; void:</span><br><span class="line">    global_position = player.global_position</span><br><span class="line"></span><br><span class="line">    var surface_up := player.global_position.normalized()</span><br><span class="line">    var forward := camera_forward.slide(surface_up).normalized()</span><br><span class="line">    forward = forward.rotated(surface_up, yaw_delta)</span><br><span class="line">    var right := surface_up.cross(forward).normalized()</span><br><span class="line">    forward = forward.rotated(right, look_pitch)</span><br><span class="line"></span><br><span class="line">    global_transform.basis = Basis.looking_at(forward, surface_up)</span><br><span class="line">    camera_forward = forward</span><br><span class="line">    yaw_delta = 0.0</span><br><span class="line"></span><br><span class="line">func _unhandled_input(event: InputEvent) -&gt; void:</span><br><span class="line">    if event is InputEventMouseMotion:</span><br><span class="line">        yaw_delta -= event.relative.x * mouse_sensitivity</span><br><span class="line">        look_pitch = clampf(</span><br><span class="line">            look_pitch - event.relative.y * mouse_sensitivity,</span><br><span class="line">            deg_to_rad(min_pitch_degrees),</span><br><span class="line">            deg_to_rad(max_pitch_degrees)</span><br><span class="line">        )</span><br><span class="line">    elif event.is_action_pressed(&quot;ui_cancel&quot;):</span><br><span class="line">        Input.mouse_mode = Input.MOUSE_MODE_VISIBLE</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="七、跳跃"><a href="#七、跳跃" class="headerlink" title="七、跳跃"></a>七、跳跃</h2><p>跳跃反而是最简单的。因为前面设置了 <code>up_direction</code>，Godot 已经知道怎么判断”站在地面上”。我们只需要把跳跃冲量加到 <code>surface_up</code> 方向：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@export var first_jump_speed := 9.8</span><br><span class="line">@export var second_jump_speed := 7.5</span><br><span class="line"></span><br><span class="line">var jumps_used := 0</span><br><span class="line"></span><br><span class="line">func handle_jump(surface_up: Vector3) -&gt; void:</span><br><span class="line">    if not Input.is_action_just_pressed(&quot;jump&quot;):</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">    if is_on_floor():</span><br><span class="line">        # 一段跳</span><br><span class="line">        velocity += surface_up * first_jump_speed</span><br><span class="line">        jumps_used = 1</span><br><span class="line">    elif jumps_used == 1:</span><br><span class="line">        # 二段跳（空中只能再跳一次）</span><br><span class="line">        velocity += surface_up * second_jump_speed</span><br><span class="line">        jumps_used = 2</span><br></pre></td></tr></table></figure>
+
+<p>二段跳力度比一段小一点（7.5 vs 9.8），这样手感有层次。<code>jumps_used</code> 在 <code>is_on_floor()</code> 时归零，所以落地之后就又能跳了。</p>
+<hr>
+<h2 id="八、完整代码总览"><a href="#八、完整代码总览" class="headerlink" title="八、完整代码总览"></a>八、完整代码总览</h2><h3 id="player-gd"><a href="#player-gd" class="headerlink" title="player.gd"></a>player.gd</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">extends CharacterBody3D</span><br><span class="line"></span><br><span class="line">const PLANET_CENTER := Vector3.ZERO</span><br><span class="line"></span><br><span class="line">@export_category(&quot;Movement&quot;)</span><br><span class="line">@export var gravity := 24.0</span><br><span class="line">@export var move_speed := 5.0</span><br><span class="line">@export var move_acceleration := 30.0</span><br><span class="line">@export var first_jump_speed := 9.8</span><br><span class="line">@export var second_jump_speed := 7.5</span><br><span class="line"></span><br><span class="line">var jumps_used := 0</span><br><span class="line">var previous_turn_input := Vector2.ZERO</span><br><span class="line">var surface_heading := Vector3.FORWARD</span><br><span class="line"></span><br><span class="line">@onready var player_mesh: MeshInstance3D = $MeshInstance3D</span><br><span class="line"></span><br><span class="line">func _physics_process(delta: float) -&gt; void:</span><br><span class="line">    var gravity_direction := global_position.direction_to(PLANET_CENTER)</span><br><span class="line">    var surface_up := -gravity_direction</span><br><span class="line"></span><br><span class="line">    up_direction = surface_up</span><br><span class="line">    align_to_surface(surface_up)</span><br><span class="line">    handle_movement(delta, surface_up)</span><br><span class="line">    handle_jump(surface_up)</span><br><span class="line"></span><br><span class="line">    velocity += gravity_direction * gravity * delta</span><br><span class="line">    move_and_slide()</span><br><span class="line"></span><br><span class="line">    if is_on_floor():</span><br><span class="line">        jumps_used = 0</span><br><span class="line"></span><br><span class="line">func align_to_surface(surface_up: Vector3) -&gt; void:</span><br><span class="line">    var forward := surface_heading.slide(surface_up)</span><br><span class="line">    if forward.length_squared() &lt; 0.001:</span><br><span class="line">        forward = Vector3.FORWARD.slide(surface_up)</span><br><span class="line">    forward = forward.normalized()</span><br><span class="line">    surface_heading = forward</span><br><span class="line">    global_transform.basis = Basis.looking_at(forward, surface_up)</span><br><span class="line"></span><br><span class="line">func handle_movement(delta: float, surface_up: Vector3) -&gt; void:</span><br><span class="line">    var input := Input.get_vector(&quot;move_left&quot;, &quot;move_right&quot;, &quot;move_forward&quot;, &quot;move_back&quot;)</span><br><span class="line">    if input.length_squared() &lt; 0.001:</span><br><span class="line">        return</span><br><span class="line">    var player_camera := get_viewport().get_camera_3d()</span><br><span class="line">    if player_camera == null:</span><br><span class="line">        return</span><br><span class="line">    var forward := -player_camera.global_transform.basis.z</span><br><span class="line">    forward = forward.slide(surface_up)</span><br><span class="line">    if forward.length_squared() &lt; 0.001:</span><br><span class="line">        forward = -global_transform.basis.z</span><br><span class="line">        forward = forward.slide(surface_up)</span><br><span class="line">    forward = forward.normalized()</span><br><span class="line">    var right := forward.cross(surface_up).normalized()</span><br><span class="line">    var move_direction := (right * input.x - forward * input.y).normalized()</span><br><span class="line">    var target_velocity := move_direction * move_speed</span><br><span class="line">    var sideways_velocity := velocity.slide(surface_up)</span><br><span class="line">    sideways_velocity = sideways_velocity.move_toward(target_velocity, move_acceleration * delta)</span><br><span class="line">    velocity = sideways_velocity + surface_up * velocity.dot(surface_up)</span><br><span class="line"></span><br><span class="line">func handle_jump(surface_up: Vector3) -&gt; void:</span><br><span class="line">    if not Input.is_action_just_pressed(&quot;jump&quot;):</span><br><span class="line">        return</span><br><span class="line">    if is_on_floor():</span><br><span class="line">        velocity += surface_up * first_jump_speed</span><br><span class="line">        jumps_used = 1</span><br><span class="line">    elif jumps_used == 1:</span><br><span class="line">        velocity += surface_up * second_jump_speed</span><br><span class="line">        jumps_used = 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="camera-rig-gd"><a href="#camera-rig-gd" class="headerlink" title="camera_rig.gd"></a>camera_rig.gd</h3><p>（见第六章末尾）</p>
+<h3 id="输入映射"><a href="#输入映射" class="headerlink" title="输入映射"></a>输入映射</h3><p>在项目设置 → Input Map 里添加以下动作（如果还没加的话）：</p>
+<table>
+<thead>
+<tr>
+<th>动作名</th>
+<th>按键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>move_forward</code></td>
+<td>W, 上箭头</td>
+</tr>
+<tr>
+<td><code>move_back</code></td>
+<td>S, 下箭头</td>
+</tr>
+<tr>
+<td><code>move_left</code></td>
+<td>A, 左箭头</td>
+</tr>
+<tr>
+<td><code>move_right</code></td>
+<td>D, 右箭头</td>
+</tr>
+<tr>
+<td><code>jump</code></td>
+<td>空格</td>
+</tr>
+</tbody></table>
+<p>这样就完成了类似《马里奥银河》的第三人称控制器</p>
+</div><!-- 初始化AI摘要--><script>document.addEventListener('DOMContentLoaded', function() {
+  if (typeof ChucklePostAI !== 'undefined') {
+    // 获取按钮文本，如果未定义则使用默认值
+    const buttons = [
+      "介绍自己",
+      "来点灵感",
+      "生成AI简介"
+    ];
+
+    new ChucklePostAI({
+      el: '#post-ai-container',
+      title_el: '.post-title',
+      summary_directly: false,
+      interface: {
+        name: "clover-AI",
+        introduce: "我是文章辅助AI: clover-AI，一个基于deepseek的强大语言模型，有什么可以帮到您？😊",
+        version: "deepseek-v4-pro",
+        button: buttons
+      }
+    });
+  }
+});
+</script><!-- 传递TOC配置给前端--><script>// 创建全局TOC配置对象
+window.tocConfig = {
+  empty_toc_behavior: "placeholder"
+};
+</script><div class="post-navigation"><div class="post-nav next"><a href="/2026/07/21/hello-world/"><span class="nav-label">下一篇 →</span><span class="nav-title">Hello World</span></a></div></div><div class="post-share"><h3 class="share-title">分享这篇文章到</h3><div class="share-buttons"><a class="share-btn twitter" href="https://twitter.com/intent/tweet?text=%E5%A6%82%E4%BD%95%E5%9C%A8Godot%204%E9%87%8C%E5%88%9B%E5%BB%BA%E7%B1%BB%E4%BC%BC%E3%80%8A%E9%A9%AC%E9%87%8C%E5%A5%A5%E9%93%B6%E6%B2%B3%E3%80%8B%E7%9A%84%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E6%8E%A7%E5%88%B6%E5%99%A8&amp;url=%2F2026%2F07%2F21%2F%25E5%25A6%2582%25E4%25BD%2595%25E5%259C%25A8Godot%25204%25E9%2587%258C%25E5%2588%259B%25E5%25BB%25BA%25E7%25B1%25BB%25E4%25BC%25BC%25E3%2580%258A%25E9%25A9%25AC%25E9%2587%258C%25E5%25A5%25A5%25E9%2593%25B6%25E6%25B2%25B3%25E3%2580%258B%25E7%259A%2584%25E7%25AC%25AC%25E4%25B8%2589%25E4%25BA%25BA%25E7%25A7%25B0%25E6%258E%25A7%25E5%2588%25B6%25E5%2599%25A8%2F" target="_blank" rel="noopener"><span>推特</span></a><a class="share-btn facebook" href="https://www.facebook.com/sharer/sharer.php?u=%2F2026%2F07%2F21%2F%25E5%25A6%2582%25E4%25BD%2595%25E5%259C%25A8Godot%25204%25E9%2587%258C%25E5%2588%259B%25E5%25BB%25BA%25E7%25B1%25BB%25E4%25BC%25BC%25E3%2580%258A%25E9%25A9%25AC%25E9%2587%258C%25E5%25A5%25A5%25E9%2593%25B6%25E6%25B2%25B3%25E3%2580%258B%25E7%259A%2584%25E7%25AC%25AC%25E4%25B8%2589%25E4%25BA%25BA%25E7%25A7%25B0%25E6%258E%25A7%25E5%2588%25B6%25E5%2599%25A8%2F" target="_blank" rel="noopener"><span>脸书</span></a><a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=%2F2026%2F07%2F21%2F%25E5%25A6%2582%25E4%25BD%2595%25E5%259C%25A8Godot%25204%25E9%2587%258C%25E5%2588%259B%25E5%25BB%25BA%25E7%25B1%25BB%25E4%25BC%25BC%25E3%2580%258A%25E9%25A9%25AC%25E9%2587%258C%25E5%25A5%25A5%25E9%2593%25B6%25E6%25B2%25B3%25E3%2580%258B%25E7%259A%2584%25E7%25AC%25AC%25E4%25B8%2589%25E4%25BA%25BA%25E7%25A7%25B0%25E6%258E%25A7%25E5%2588%25B6%25E5%2599%25A8%2F" target="_blank" rel="noopener"><span>领英</span></a><a class="share-btn wechat" href="#" data-wechat="/2026/07/21/%E5%A6%82%E4%BD%95%E5%9C%A8Godot%204%E9%87%8C%E5%88%9B%E5%BB%BA%E7%B1%BB%E4%BC%BC%E3%80%8A%E9%A9%AC%E9%87%8C%E5%A5%A5%E9%93%B6%E6%B2%B3%E3%80%8B%E7%9A%84%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E6%8E%A7%E5%88%B6%E5%99%A8/"><span>微信</span></a><a class="share-btn qq" href="https://connect.qq.com/widget/shareqq/index.html?url=%2F2026%2F07%2F21%2F%25E5%25A6%2582%25E4%25BD%2595%25E5%259C%25A8Godot%25204%25E9%2587%258C%25E5%2588%259B%25E5%25BB%25BA%25E7%25B1%25BB%25E4%25BC%25BC%25E3%2580%258A%25E9%25A9%25AC%25E9%2587%258C%25E5%25A5%25A5%25E9%2593%25B6%25E6%25B2%25B3%25E3%2580%258B%25E7%259A%2584%25E7%25AC%25AC%25E4%25B8%2589%25E4%25BA%25BA%25E7%25A7%25B0%25E6%258E%25A7%25E5%2588%25B6%25E5%2599%25A8%2F&amp;title=%E5%A6%82%E4%BD%95%E5%9C%A8Godot%204%E9%87%8C%E5%88%9B%E5%BB%BA%E7%B1%BB%E4%BC%BC%E3%80%8A%E9%A9%AC%E9%87%8C%E5%A5%A5%E9%93%B6%E6%B2%B3%E3%80%8B%E7%9A%84%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E6%8E%A7%E5%88%B6%E5%99%A8" target="_blank" rel="noopener"><span>QQ</span></a><a class="share-btn weibo" href="https://service.weibo.com/share/share.php?url=%2F2026%2F07%2F21%2F%25E5%25A6%2582%25E4%25BD%2595%25E5%259C%25A8Godot%25204%25E9%2587%258C%25E5%2588%259B%25E5%25BB%25BA%25E7%25B1%25BB%25E4%25BC%25BC%25E3%2580%258A%25E9%25A9%25AC%25E9%2587%258C%25E5%25A5%25A5%25E9%2593%25B6%25E6%25B2%25B3%25E3%2580%258B%25E7%259A%2584%25E7%25AC%25AC%25E4%25B8%2589%25E4%25BA%25BA%25E7%25A7%25B0%25E6%258E%25A7%25E5%2588%25B6%25E5%2599%25A8%2F&amp;title=%E5%A6%82%E4%BD%95%E5%9C%A8Godot%204%E9%87%8C%E5%88%9B%E5%BB%BA%E7%B1%BB%E4%BC%BC%E3%80%8A%E9%A9%AC%E9%87%8C%E5%A5%A5%E9%93%B6%E6%B2%B3%E3%80%8B%E7%9A%84%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E6%8E%A7%E5%88%B6%E5%99%A8" target="_blank" rel="noopener"><span>微博</span></a><a class="share-btn copy" href="#" data-copy="/2026/07/21/%E5%A6%82%E4%BD%95%E5%9C%A8Godot%204%E9%87%8C%E5%88%9B%E5%BB%BA%E7%B1%BB%E4%BC%BC%E3%80%8A%E9%A9%AC%E9%87%8C%E5%A5%A5%E9%93%B6%E6%B2%B3%E3%80%8B%E7%9A%84%E7%AC%AC%E4%B8%89%E4%BA%BA%E7%A7%B0%E6%8E%A7%E5%88%B6%E5%99%A8/"><span>点击复制链接</span></a></div></div></article></div><section class="comments-section"><div class="comments-container"><h2 class="comments-title">评论区</h2><div class="comments-content"><div id="twikoo-comments"></div><div id="twikoo"></div><script src="https://unpkg.com/twikoo@1.6.39/dist/twikoo.all.min.js"></script><script>(function initTwikoo() {
+  if (typeof twikoo === 'undefined') {
+    setTimeout(initTwikoo, 200);
+    return;
+  }
+  twikoo.init({
+    envId: 'https://blog-twitoo.vercel.app',
+    el: '#twikoo',
+    region: '',
+    path: 'window.location.pathname',
+    visitor: true,
+    onCommentLoaded: function () {
+      console.log('Twikoo评论加载成功');
+    }
+  });
+})();</script></div></div></section></main><div id="waves-container"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><footer class="footer"><div class="footer-bottom"><div class="footer-copyright">© 2026 晴空四叶草. 保留所有权利.</div><!-- Footer centered image with link--><div class="footer-badges"><a target="_blank" rel="noopener" href="https://hexo.io/" title="博客框架为Hexo"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg" alt="博客框架为Hexo"/></a><a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"><img src="https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg" alt="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"/></a></div></div></footer></div><!-- 立即应用暗色模式，避免页面闪烁--><script>(function() {
+  // 【修改点 2】底部脚本：同样逻辑，默认为 true
+  var savedDarkMode = localStorage.getItem('darkMode');
+  var shouldBeDark = savedDarkMode === null ? true : savedDarkMode === 'true';
+
+  if (shouldBeDark) {
+    document.body.classList.add('dark-mode');
+  }
+
+  // 防止页面闪烁，在DOM加载完成前设置一个初始类
+  document.documentElement.style.visibility = 'hidden';
+  document.addEventListener('DOMContentLoaded', function() {
+    document.documentElement.style.visibility = 'visible';
+  });
+})();
+</script>
+<script src="/js/main.js"></script>
+
+<script src="/js/tags.js"></script>
+
+<script src="/js/categories-accordion.js"></script>
+
+<script src="/js/highlight.js"></script>
+
+<script src="/js/load-more.js"></script>
+
+<script src="/js/header-scroll.js"></script>
+
+<script src="/js/toc.js"></script>
+
+<script src="/js/image-zoom.js"></script>
+
+<script src="/js/share.js"></script>
+
+<script src="/js/search.js"></script>
+
+<script src="/js/hide-inline-interaction.js"></script>
+
+<script src="/js/hide-toggle-interaction.js"></script>
+
+<script src="/js/dark-mode-sync.js"></script>
+
+<script src="/js/animations.js"></script>
+
+<script src="/js/ai-theme.js"></script>
+
+<script src="/js/loading-animation.js"></script>
+
+<script src="/js/article-modal.js"></script>
+
+<script src="/js/music-player.js"></script>
+<script>window.theme = {
+  features: {"dark_mode":true,"smooth_scroll":true,"back_to_top":true,"loading_animation":false},
+  code_block: {"height_limit":200,"enable_folding":true,"max_height":"300px","show_lang":true},
+  ai_summary: {"enable":true,"api_key":"sk-5a4f3ff9e5294570aa61562ce0d429ec","summary_directly":false,"ai_name":"clover-AI","ai_introduce":"我是文章辅助AI: clover-AI，一个基于deepseek的强大语言模型，有什么可以帮到您？😊","ai_version":"deepseek-v4-pro","buttons":["介绍自己","来点灵感","生成AI简介"]},
+  categories: {"layout":"accordion","accordion_animation":true,"show_empty_categories":true},
+  article_list: {"card_size":"normal","view_mode":"modal"}
+};
+</script><script src="/js/ai.js"></script><script src="/js/postai.js"></script><script src="/js/math-support.js"></script><script src="/js/click-fireworks.js"></script><script src="/js/falling-leaves.js"></script><script src="/js/lang-switch.js"></script><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><div id="blog-player"></div><script src="/js/music-init.js"></script></body></html>

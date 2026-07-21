@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function addClickEventToLinks() {
       // ★★★ 新增：加入了 .search-result-link 选择器 ★★★
       const articleLinks = document.querySelectorAll(
-        ".article-title a, .article-image a, .read-more, .search-result-link",
+        ".article-title a, .article-image a, .post-item-title a, .archive-post-title a, .read-more, .search-result-link",
       );
 
       articleLinks.forEach((link) => {
@@ -163,6 +163,10 @@ document.addEventListener("DOMContentLoaded", function () {
           }
           // 1. 如果点击的是标题链接，直接取自己的文本
           else if (this.parentElement.classList.contains("article-title")) {
+            initialTitle = this.textContent.trim();
+          } else if (this.parentElement.classList.contains("post-item-title")) {
+            initialTitle = this.textContent.trim();
+          } else if (this.parentElement.classList.contains("archive-post-title")) {
             initialTitle = this.textContent.trim();
           } else {
             // 2. 向上找到共同的卡片容器
