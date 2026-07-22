@@ -114,8 +114,7 @@ function ChucklePostAI(AI_option) {
     let controller = new AbortController();
     let signal = controller.signal;
 
-    // DeepSeek API配置
-    // 从主题配置中获取API密钥，如果没有配置则使用默认值（实际使用时应配置有效密钥）
+    // The browser only calls the Worker; the provider key never reaches the page.
 
     // 打字机动画
     const animate = (timestamp) => {
@@ -270,8 +269,13 @@ function ChucklePostAI(AI_option) {
       signal = controller.signal;
 
       var themeAI = (window.theme && window.theme.ai_summary) ? window.theme.ai_summary : {};
-      var apiKey = themeAI.api_key || "";
-      var apiUrl = "https://api.deepseek.com/v1/chat/completions";
+      var apiUrl = themeAI.api_endpoint || "";
+
+      if (!apiUrl) {
+        startAI(`${interface.name}尚未配置服务，请联系网站管理员。`);
+        completeGenerate = true;
+        return null;
+      }
 
       try {
         const response = await fetch(apiUrl, {
@@ -279,11 +283,9 @@ function ChucklePostAI(AI_option) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + apiKey,
           },
           body: JSON.stringify({
-            model: themeAI.ai_version || "deepseek-chat",
-            messages: [{ role: "user", content: prompt }],
+            prompt: prompt,
           }),
         });
 
@@ -299,7 +301,7 @@ function ChucklePostAI(AI_option) {
         }
 
         const data = await response.json();
-        return data.choices[0].message.content;
+        return data.content;
       } catch (error) {
         if (error.name === "AbortError") {
           // 请求被中止
